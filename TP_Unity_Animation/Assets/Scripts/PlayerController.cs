@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     {
         _playerInput = GetComponent<PlayerInput>();
         _rb = gameObject.GetComponent<Rigidbody2D>();
-        _animator = gameObject.GetComponent<Animator>();
+        _animator = gameObject.GetComponentInChildren<Animator>();
 
         _sprintAction = _playerInput.currentActionMap.FindAction("Sprint");
         _moveAction = _playerInput.currentActionMap.FindAction("Move");
@@ -48,6 +48,13 @@ public class PlayerController : MonoBehaviour
     private void Move(InputAction.CallbackContext ctx)
     {
         _lastDirection = _moveAction.ReadValue<Vector2>();
+
+        if (transform.localScale.x > 0)
+        {
+            
+        }
+        transform.localScale = new Vector3(1 * _lastDirection.x * Mathf.Abs(transform.lossyScale.x) , transform.lossyScale.y, transform.lossyScale.z);
+        //transform.localScale = new Vector3((_lastDirection.x > 0 ? 1 : -1) * transform.lossyScale.x, transform.lossyScale.y, transform.lossyScale.z);
     }
 
 
@@ -55,18 +62,21 @@ public class PlayerController : MonoBehaviour
     {
         // Add force
         _rb.AddForce(_lastDirection * _dashSpeed);
+        _animator.SetTrigger("Dash");
     }
     
     private void Sprint(InputAction.CallbackContext ctx)
     {
         _isSprinting = true;
         _currentTargetSpeed = _speedSprint;
+        _animator.SetBool("isSprinting", true);
     }
 
     private void StopSprinting(InputAction.CallbackContext ctx)
     {
         _isSprinting = false;
         _currentTargetSpeed = _speedWalk;
+        _animator.SetBool("isSprinting", false);
     }
 
     private void OnDestroy()
