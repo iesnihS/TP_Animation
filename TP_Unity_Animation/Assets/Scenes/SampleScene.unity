@@ -200,6 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speedWalk: 10
   _speedSprint: 20
+  _dashSpeed: 10000
 --- !u!50 &201626673
 Rigidbody2D:
   serializedVersion: 5
