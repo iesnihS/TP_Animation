@@ -16,12 +16,14 @@ public class PlayerController : MonoBehaviour
     private Vector2 _lastDirection;
     private bool _isSprinting = false;
     private Rigidbody2D _rb;
+    private Animator _animator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         _playerInput = GetComponent<PlayerInput>();
         _rb = gameObject.GetComponent<Rigidbody2D>();
+        _animator = gameObject.GetComponent<Animator>();
 
         _sprintAction = _playerInput.currentActionMap.FindAction("Sprint");
         _moveAction = _playerInput.currentActionMap.FindAction("Move");
