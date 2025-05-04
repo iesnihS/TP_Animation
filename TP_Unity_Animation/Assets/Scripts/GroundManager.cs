@@ -11,7 +11,7 @@ public class GroundManager : MonoBehaviour
         Vector3 blockPosition2D = new Vector3(block.transform.position.x, _playerTransform.position.y, _playerTransform.position.z);
         if( Vector3.Distance(_playerTransform.position, blockPosition2D + Vector3.right *(block.transform.localScale.x/2) ) < 1f) 
         {
-            Debug.Log("Hey");
+          
         }
     }
 }
